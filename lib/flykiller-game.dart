@@ -8,6 +8,10 @@ import 'package:fly_killer/components/backGround.dart';
 
 import 'components/fly.dart';
 import 'components/house-Fly.dart';
+import 'components/drooler-fly.dart';
+import 'components/agile-Fly.dart';
+import 'components/macho-Fly.dart';
+import 'components/hungry-Fly.dart';
 
 class FlyKillerGame extends Game {
   Size screenSize;
@@ -30,7 +34,23 @@ class FlyKillerGame extends Game {
   void spawnFly(){  // добавлятель мух
     double x = rnd.nextDouble() * (screenSize.width - tileSize);
     double y = rnd.nextDouble() * (screenSize.height - tileSize);
-    flies.add(HouseFly(this,x,y));
+    switch (rnd.nextInt(5)){
+      case 0:
+        flies.add(HouseFly(this, x, y));
+        break;
+      case 1:
+        flies.add(DroolerFly(this, x, y));
+        break;
+      case 2:
+        flies.add(AgileFly(this, x, y));
+        break;
+      case 3:
+        flies.add(MachoFly(this, x, y));
+        break;
+      case 4:
+        flies.add(HungryFly(this, x, y));
+        break;
+    }
   }
 
   @override

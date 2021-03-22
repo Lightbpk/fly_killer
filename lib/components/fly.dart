@@ -19,12 +19,17 @@ class Fly {
     if(isDead){
       deadSprite.renderRect(c, flyRect.inflate(2));
     }else{
-      flyingSprite[flyingSpriteIndex.toInt()].renderRect(c, flyRect.inflate(2));
+      flyingSprite[flyingSpriteIndex.toInt()].renderRect(c, flyRect.inflate(2));//index округляется до int
     }
   }
   void update(double t){
     if(isDead){
       flyRect = flyRect.translate(0, game.tileSize * 12 * t);
+    }else {
+      flyingSpriteIndex += 30 * t;//МАГИЯ анимации предполагается что е = 0,016
+      if (flyingSpriteIndex >= 2){
+        flyingSpriteIndex -= 2;
+      }
     }
     if(flyRect.top > game.screenSize.height){
       isOffScreen = true;
