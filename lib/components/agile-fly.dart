@@ -12,4 +12,5 @@ class AgileFly extends Fly{
     deadSprite = Sprite("flies/agile-fly-dead.png");
     flyRect = Rect.fromLTWH(x, y, game.tileSize * 1.5 , game.tileSize * 1.5);
   }
+  double get speed => game.tileSize * 8;
 }

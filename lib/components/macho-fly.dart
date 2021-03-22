@@ -12,4 +12,5 @@ class MachoFly extends Fly{
     deadSprite = Sprite("flies/macho-fly-dead.png");
     flyRect = Rect.fromLTWH(x, y, game.tileSize * 2.025 , game.tileSize * 2.025);
   }
+  double get speed => game.tileSize * 6;
 }
