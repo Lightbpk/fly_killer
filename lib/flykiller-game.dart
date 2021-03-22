@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fly_killer/components/backGround.dart';
 
 import 'components/fly.dart';
 
@@ -12,19 +13,20 @@ class FlyKillerGame extends Game {
   double tileSize;
   List<Fly> flies;
   Random rnd;
+  BackGround backGround;
 
   FlyKillerGame(){
     initialize();
 
   }
-  void initialize() async {
+  void initialize() async {// init
     flies = new List<Fly>();
     rnd = Random();
     resize(await Flame.util.initialDimensions());
-
+    backGround = BackGround(this);
     spawnFly();
   }
-  void spawnFly(){
+  void spawnFly(){  // добавлятель мух
     double x = rnd.nextDouble() * (screenSize.width - tileSize);
     double y = rnd.nextDouble() * (screenSize.height - tileSize);
     flies.add(Fly(this,x,y));
@@ -32,11 +34,8 @@ class FlyKillerGame extends Game {
 
   @override
   void render(Canvas canvas) {
-    Rect bgRect = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
-    Paint bgPaint = Paint();
-    bgPaint.color = Color(0xff576574);
-    canvas.drawRect(bgRect, bgPaint);
-    flies.forEach((Fly fly)=> fly.render(canvas));
+    backGround.render(canvas);//рендер бэкграунда
+    flies.forEach((Fly fly)=> fly.render(canvas)); // отрисовка мух ил List (flies)
   }
 
   @override
@@ -47,7 +46,7 @@ class FlyKillerGame extends Game {
 
   void resize(Size size){
     screenSize = size;
-    tileSize = screenSize.width / 9;
+    tileSize = screenSize.width / 9;// размер (ширина) одного тэйла
   }
   void onTapDown(TapDownDetails d){
     print('onTapDown - work');
