@@ -12,9 +12,7 @@ class Fly {
   Sprite deadSprite;
   double flyingSpriteIndex = 0;
 
-  Fly(this.game, double x , double y){
-    flyRect = Rect.fromLTWH(x, y, game.tileSize, game.tileSize);
-  }
+  Fly(this.game);
   void render(Canvas c){
     if(isDead){
       deadSprite.renderRect(c, flyRect.inflate(2));
@@ -26,7 +24,7 @@ class Fly {
     if(isDead){
       flyRect = flyRect.translate(0, game.tileSize * 12 * t);
     }else {
-      flyingSpriteIndex += 30 * t;//МАГИЯ анимации предполагается что е = 0,016
+      flyingSpriteIndex += 30 * t;//МАГИЯ анимации предполагается что t = 0,016
       if (flyingSpriteIndex >= 2){
         flyingSpriteIndex -= 2;
       }

@@ -32,8 +32,8 @@ class FlyKillerGame extends Game {
     spawnFly();
   }
   void spawnFly(){  // добавлятель мух
-    double x = rnd.nextDouble() * (screenSize.width - tileSize);
-    double y = rnd.nextDouble() * (screenSize.height - tileSize);
+    double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
+    double y = rnd.nextDouble() * (screenSize.height - (tileSize * 2.025));
     switch (rnd.nextInt(5)){
       case 0:
         flies.add(HouseFly(this, x, y));
