@@ -8,7 +8,7 @@ class MachoFly extends Fly{
   MachoFly(FlyKillerGame game,double x, double y): super(game){
     flyingSprite = List<Sprite>();
     flyingSprite.add(Sprite("flies/macho-fly-1.png"));
-    flyingSprite.add(Sprite('flies/macho-fly-.png'));
+    flyingSprite.add(Sprite('flies/macho-fly-2.png'));
     deadSprite = Sprite("flies/macho-fly-dead.png");
     flyRect = Rect.fromLTWH(x, y, game.tileSize * 2.025 , game.tileSize * 2.025);
   }
