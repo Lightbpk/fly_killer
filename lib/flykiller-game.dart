@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fly_killer/components/backGround.dart';
 
 import 'components/fly.dart';
+import 'components/house-Fly.dart';
 
 class FlyKillerGame extends Game {
   Size screenSize;
@@ -29,7 +30,7 @@ class FlyKillerGame extends Game {
   void spawnFly(){  // добавлятель мух
     double x = rnd.nextDouble() * (screenSize.width - tileSize);
     double y = rnd.nextDouble() * (screenSize.height - tileSize);
-    flies.add(Fly(this,x,y));
+    flies.add(HouseFly(this,x,y));
   }
 
   @override
