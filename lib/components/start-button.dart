@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/sprite.dart';
 import 'package:fly_killer/flykiller-game.dart';
+import 'package:fly_killer/view.dart';
 
 class StartButton {
   final FlyKillerGame game;
@@ -18,5 +19,7 @@ class StartButton {
     sprite.renderRect(c, rect);
   }
   void update(double t){}
-  void onTapDown(){}
+  void onTapDown(){
+    game.activeView = View.playing;
+  }
 }

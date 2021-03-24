@@ -80,12 +80,20 @@ class FlyKillerGame extends Game {
     tileSize = screenSize.width / 9;// размер (ширина) одного тэйла
   }
   void onTapDown(TapDownDetails d){
-    print('onTapDown - work');
-    flies.forEach((Fly fly) {
-      if(fly.flyRect.contains(d.globalPosition)){
-        fly.onTapDown();
-        print("fly taped");
+    bool isHandled = false;
+    if(!isHandled && startButton.rect.contains(d.globalPosition)){
+      if(activeView == View.home || activeView == View.lose){
+        startButton.onTapDown();
+        isHandled = true;
       }
-    });
+    }
+    if(!isHandled) {
+      flies.forEach((Fly fly) {
+        if (fly.flyRect.contains(d.globalPosition)) {
+          fly.onTapDown();
+          isHandled = true;
+        }
+      });
+    }
   }
 }
