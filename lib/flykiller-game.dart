@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fly_killer/components/backGround.dart';
 import 'package:fly_killer/components/start-button.dart';
 import 'package:fly_killer/views/home-view.dart';
+import 'package:fly_killer/views/lost-view.dart';
 
 import 'components/fly.dart';
 import 'components/house-Fly.dart';
@@ -26,6 +27,7 @@ class FlyKillerGame extends Game {
   StartButton startButton;
 
   HomeView homeView;
+  LostView lostView;
   FlyKillerGame(){
     initialize();
 
@@ -37,6 +39,7 @@ class FlyKillerGame extends Game {
     backGround = BackGround(this);
     spawnFly();
     homeView = HomeView(this);
+    lostView = LostView(this);
     startButton = StartButton(this);
   }
   void spawnFly(){  // добавлятель мух
@@ -66,6 +69,7 @@ class FlyKillerGame extends Game {
     backGround.render(canvas);//рендер бэкграунда
     flies.forEach((Fly fly)=> fly.render(canvas)); // отрисовка мух ил List (flies)
     if(activeView == View.home) homeView.render(canvas);
+    if(activeView == View.lose) lostView.render(canvas);
     if(activeView == View.home || activeView == View.lose) startButton.render(canvas);
   }
 
@@ -80,6 +84,7 @@ class FlyKillerGame extends Game {
     tileSize = screenSize.width / 9;// размер (ширина) одного тэйла
   }
   void onTapDown(TapDownDetails d){
+    bool didHitAFly = false;
     bool isHandled = false;
     if(!isHandled && startButton.rect.contains(d.globalPosition)){
       if(activeView == View.home || activeView == View.lose){
@@ -92,8 +97,13 @@ class FlyKillerGame extends Game {
         if (fly.flyRect.contains(d.globalPosition)) {
           fly.onTapDown();
           isHandled = true;
+          didHitAFly = true;
         }
       });
+      if(activeView == View.playing && !didHitAFly){
+        activeView = View.lose;
+      }
+
     }
   }
 }
