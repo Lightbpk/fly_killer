@@ -23,18 +23,18 @@ class FlyKillerGame extends Game {
   BackGround backGround;
   View activeView = View.home;
 
-  //HomeView homeView;
+  HomeView homeView;
   FlyKillerGame(){
     initialize();
 
   }
   void initialize() async {// init
-    //homeView = HomeView(this);
     flies = new List<Fly>();
     rnd = Random();
     resize(await Flame.util.initialDimensions());
     backGround = BackGround(this);
     spawnFly();
+    homeView = HomeView(this);
   }
   void spawnFly(){  // добавлятель мух
     double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
@@ -62,7 +62,7 @@ class FlyKillerGame extends Game {
   void render(Canvas canvas) {
     backGround.render(canvas);//рендер бэкграунда
     flies.forEach((Fly fly)=> fly.render(canvas)); // отрисовка мух ил List (flies)
-    //if(activeView == View.home) homeView.render(canvas);
+    if(activeView == View.home) homeView.render(canvas);
   }
 
   @override
