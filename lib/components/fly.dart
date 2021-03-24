@@ -28,7 +28,6 @@ class Fly {
       flyRect = flyRect.translate(0, game.tileSize * 12 * t);
       if(flyRect.top > game.screenSize.height){
         isOffScreen = true;
-        print('Fly fly away');
       }
     }else {
       flyingSpriteIndex += 30 * t;//МАГИЯ анимации предполагается что t = 0,016
@@ -51,7 +50,7 @@ class Fly {
   }
   void onTapDown(){
     isDead = true;
-    game.spawnFly();
+    //------
   }
   double get speed => game.tileSize * 3 ;
 

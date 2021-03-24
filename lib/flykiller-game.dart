@@ -6,6 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fly_killer/components/backGround.dart';
 import 'package:fly_killer/components/start-button.dart';
+import 'package:fly_killer/controllers/spawner.dart';
 import 'package:fly_killer/views/home-view.dart';
 import 'package:fly_killer/views/lost-view.dart';
 
@@ -25,6 +26,7 @@ class FlyKillerGame extends Game {
   BackGround backGround;
   View activeView = View.home;
   StartButton startButton;
+  FlySpawner spawner;
 
   HomeView homeView;
   LostView lostView;
@@ -37,10 +39,10 @@ class FlyKillerGame extends Game {
     rnd = Random();
     resize(await Flame.util.initialDimensions());
     backGround = BackGround(this);
-    spawnFly();
     homeView = HomeView(this);
     lostView = LostView(this);
     startButton = StartButton(this);
+    spawner = FlySpawner(this);
   }
   void spawnFly(){  // добавлятель мух
     double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
@@ -77,6 +79,7 @@ class FlyKillerGame extends Game {
   void update(double t) {
     flies.forEach((Fly fly) => fly.update(t));
     flies.removeWhere((Fly fly) => fly.isOffScreen);
+    spawner.update(t);
   }
 
   void resize(Size size){
