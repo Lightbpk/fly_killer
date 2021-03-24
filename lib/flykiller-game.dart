@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fly_killer/components/backGround.dart';
+import 'package:fly_killer/components/start-button.dart';
 import 'package:fly_killer/views/home-view.dart';
 
 import 'components/fly.dart';
@@ -22,6 +23,7 @@ class FlyKillerGame extends Game {
   Random rnd;
   BackGround backGround;
   View activeView = View.home;
+  StartButton startButton;
 
   HomeView homeView;
   FlyKillerGame(){
@@ -35,6 +37,7 @@ class FlyKillerGame extends Game {
     backGround = BackGround(this);
     spawnFly();
     homeView = HomeView(this);
+    startButton = StartButton(this);
   }
   void spawnFly(){  // добавлятель мух
     double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
@@ -63,6 +66,7 @@ class FlyKillerGame extends Game {
     backGround.render(canvas);//рендер бэкграунда
     flies.forEach((Fly fly)=> fly.render(canvas)); // отрисовка мух ил List (flies)
     if(activeView == View.home) homeView.render(canvas);
+    if(activeView == View.home || activeView == View.lose) startButton.render(canvas);
   }
 
   @override
