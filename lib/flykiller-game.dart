@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fly_killer/components/backGround.dart';
+import 'package:fly_killer/views/home-view.dart';
 
 import 'components/fly.dart';
 import 'components/house-Fly.dart';
@@ -12,6 +13,7 @@ import 'components/drooler-fly.dart';
 import 'components/agile-Fly.dart';
 import 'components/macho-Fly.dart';
 import 'components/hungry-Fly.dart';
+import 'package:fly_killer/view.dart';
 
 class FlyKillerGame extends Game {
   Size screenSize;
@@ -19,12 +21,15 @@ class FlyKillerGame extends Game {
   List<Fly> flies;
   Random rnd;
   BackGround backGround;
+  View activeView = View.home;
 
+  //HomeView homeView;
   FlyKillerGame(){
     initialize();
 
   }
   void initialize() async {// init
+    //homeView = HomeView(this);
     flies = new List<Fly>();
     rnd = Random();
     resize(await Flame.util.initialDimensions());
@@ -57,6 +62,7 @@ class FlyKillerGame extends Game {
   void render(Canvas canvas) {
     backGround.render(canvas);//рендер бэкграунда
     flies.forEach((Fly fly)=> fly.render(canvas)); // отрисовка мух ил List (flies)
+    //if(activeView == View.home) homeView.render(canvas);
   }
 
   @override
