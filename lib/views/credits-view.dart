@@ -16,6 +16,6 @@ class CreditsView{
     sprite = Sprite('ui/dialog-credits.png');
   }
   void render(Canvas c){
-    sprite.renderRect(c, rect);
+    sprite.renderRect(c, rect);//
   }
 }
